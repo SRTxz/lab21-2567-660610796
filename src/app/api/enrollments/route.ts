@@ -108,7 +108,7 @@ export const POST = async (request: NextRequest) => {
       { status: 409 }
     );
   }
-  const enrolled = await prisma.enrollment.create({
+  await prisma.enrollment.create({
     data: {
       studentId: studentId,
       courseNo: courseNo,
@@ -160,14 +160,14 @@ export const DELETE = async (request: NextRequest) => {
 
   const prisma = getPrisma();
   // Perform data delete
-      const deleted = await prisma.enrollment.delete({
-        where: {
-          courseNo_studentId: {
-            courseNo: courseNo,
-            studentId: studentId,
-          },
-        },
-      });
+  await prisma.enrollment.delete({
+    where: {
+    courseNo_studentId: {
+      courseNo: courseNo,
+      studentId: studentId,
+      },
+    },
+  });
 
   return NextResponse.json({
     ok: true,
